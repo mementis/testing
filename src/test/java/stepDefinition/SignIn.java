@@ -55,9 +55,9 @@ public class SignIn {
 		System.out.println(driver.getTitle());
 
 	}
-
 	@When("^User enters valid username and password$")
 	public void user_enters_valid_username_and_password() throws Throwable {
+
 		String validEmail = "mena_tra@yahoo.com";
 		String validPassword = "kokoska";
 		String url = "http://automationpractice.com/index.php?controller=authentication&back=my-account";
@@ -65,16 +65,40 @@ public class SignIn {
 		// Write code here that turns the phrase above into concrete actions
 		driver.findElement(By.name("email")).sendKeys(validEmail);
 		driver.findElement(By.name("passwd")).sendKeys(validPassword);
-		driver.findElement(By.name("SubmitLogin")).submit();
-		assertNotNull(driver.findElement(By.className("header_user_info")));
+		assertNotNull(driver.findElement(By.className("form-ok")));
+		
+		driver.findElement(By.name("SubmitLogin")).click();
 
 	}
 
 	@Then("^User gets access to user's account$")
 	public void user_gets_access_to_user_s_account() throws Throwable {
-		    driver.get(driver.getCurrentUrl());
+			String expURL = "http://automationpractice.com/index.php?controller=my-account";
+			driver.get(driver.getCurrentUrl());
+			assertEquals(driver.getCurrentUrl(), expURL);
+
+			assertNotNull(driver.findElement(By.className("header_user_info")));
+
 			System.out.println("access");
 				
 		
 	}
+	@Then("^User clicks on SignOut button$")
+	public void user_clicks_on_sign_out_button() throws Throwable{
+		driver.get(driver.getCurrentUrl());
+		System.out.println(driver.getCurrentUrl());
+		driver.findElement(By.className("logout")).click();
+	    // Write code here that turns the phrase above into concrete actions
+	    //throw new io.cucumber.java.PendingException();
+	}
+
+	@Then("^User is no longer logged in$")
+	public void user_is_no_longer_logged_in() throws Throwable{
+		String outURL = "http://automationpractice.com/index.php?controller=authentication&back=my-account";
+		assertEquals(driver.getCurrentUrl(), outURL);
+		System.out.println(driver.getCurrentUrl());
+	    // Write code here that turns the phrase above into concrete actions
+	    //throw new io.cucumber.java.PendingException();
+	}
+	
 }
