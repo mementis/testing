@@ -7,7 +7,8 @@ import io.cucumber.junit.CucumberOptions;
 
 
 @CucumberOptions(
-        features = "src/test/resources/SignIn.feature",
+        features = {"src/test/resources/features/CreateAccount.feature",
+        			"src/test/resources/SignIn.feature"},
         glue = "stepDefinition",
         		plugin = { "pretty" },
         		
