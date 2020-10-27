@@ -57,27 +57,27 @@ public class CreateAccount {
 	public void user_fills_form_with_valid_credentials() throws Throwable{
 		//driver.navigate().to(baseURL + "#account-creation");
 		WebDriverWait wdw = new WebDriverWait(driver, 10);
-		WebElement we = wdw.until(ExpectedConditions.presenceOfElementLocated(By.name("customer_firstname")));
+		WebElement we = wdw.until(ExpectedConditions.presenceOfElementLocated(By.id("account-creation_form")));
 		Account account = TestUtils.generateAccount();
-		we.sendKeys(account.getFirstName());
-		driver.findElement(By.name("customer_firstname")).sendKeys(account.getFirstName());
-		driver.findElement(By.name("customer_lastname")).sendKeys(account.getLastName());
-		driver.findElement(By.name("passwd")).sendKeys(account.getPassword());
-		driver.findElement(By.name("firstname")).sendKeys(account.getFirstName());
-		driver.findElement(By.name("lastname")).sendKeys(account.getLastName());
-		driver.findElement(By.name("address1")).sendKeys(String.valueOf(account.getAddress().getPoBox()) + account.getAddress().getAddressName());
-		driver.findElement(By.name("city")).sendKeys(account.getCity());
 		
-		Select dropState = new Select(driver.findElement(By.name("id_state")));
+		we.findElement(By.name("customer_firstname")).sendKeys(account.getFirstName());
+		we.findElement(By.name("customer_lastname")).sendKeys(account.getLastName());
+		we.findElement(By.name("passwd")).sendKeys(account.getPassword());
+		we.findElement(By.name("firstname")).sendKeys(account.getFirstName());
+		we.findElement(By.name("lastname")).sendKeys(account.getLastName());
+		we.findElement(By.name("address1")).sendKeys(String.valueOf(account.getAddress().getPoBox()) + account.getAddress().getAddressName());
+		we.findElement(By.name("city")).sendKeys(account.getCity());
+		
+		Select dropState = new Select(we.findElement(By.name("id_state")));
 		dropState.selectByVisibleText(account.getState());
 		
-		driver.findElement(By.name("postcode")).sendKeys(String.valueOf(account.getZipCode()));
+		we.findElement(By.name("postcode")).sendKeys(String.valueOf(account.getZipCode()));
 		
-		Select dropCountry = new Select(driver.findElement(By.name("id_country")));
+		Select dropCountry = new Select(we.findElement(By.name("id_country")));
 		dropCountry.selectByVisibleText(account.getCountry());
 		
-		driver.findElement(By.name("phone_mobile")).sendKeys(account.getPhone().getMobile());
-	    driver.findElement(By.name("alias")).sendKeys(account.getAddress().getAliasAddress());
+		we.findElement(By.name("phone_mobile")).sendKeys(account.getPhone().getMobile());
+	    we.findElement(By.name("alias")).sendKeys(account.getAddress().getAliasAddress());
 		
 	}
 
