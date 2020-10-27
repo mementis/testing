@@ -2,8 +2,12 @@ package stepDefinition;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -15,25 +19,28 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
-public class CreateAccount {
-	String baseURL;
+import java.util.concurrent.TimeUnit;
 
+public class CreateAccount {
+	
+	String baseURL;
 	WebDriver driver;
+	
 	
 	@Given("User lands on authentication page")
 	public void user_lands_on_authentication_page() throws Throwable{
 		baseURL  = "http://automationpractice.com/index.php?controller=authentication&back=my-account";
+		System.setProperty("webdriver.chrome.driver", "C:\\Users\\Mena\\eclipse-workspace\\meniki\\chromedriver.exe");
 		driver  = new ChromeDriver();
 		driver.get(baseURL);
-		System.setProperty("webdriver.chrome.driver", "C:\\Users\\Mena\\eclipse-workspace\\meniki\\chromedriver.exe");
-	    
 	}
 
 	@When("User submits valid e-mail into e-mail address box")
 	public void user_enters_e_mail_into_e_mail_adress_box() throws Throwable{
-		driver.get(baseURL);
+		//driver.get(baseURL);
 		driver.findElement(By.name("email_create")).sendKeys(TestUtils.generateEmail());
 		driver.findElement(By.name("SubmitCreate")).click();
+		
 		System.out.println(TestUtils.generateEmail());
 	   
 	}
@@ -41,16 +48,18 @@ public class CreateAccount {
 	@Then("User gets redirected to account creation page")
 	public void user_gets_redirecetd_to_account_creation_page() throws Throwable {
 		driver.getCurrentUrl();
+	
 		
-		
-	    // Write code here that turns the phrase above into concrete actions
-	    //throw new io.cucumber.java.PendingException();
+	    
 	}
 
 	@When("User fills form with valid credentials")
-	public void user_fills_form_with_valid_credentials() {
-
+	public void user_fills_form_with_valid_credentials() throws Throwable{
+		//driver.navigate().to(baseURL + "#account-creation");
+		WebDriverWait wdw = new WebDriverWait(driver, 10);
+		WebElement we = wdw.until(ExpectedConditions.presenceOfElementLocated(By.name("customer_firstname")));
 		Account account = TestUtils.generateAccount();
+		we.sendKeys(account.getFirstName());
 		driver.findElement(By.name("customer_firstname")).sendKeys(account.getFirstName());
 		driver.findElement(By.name("customer_lastname")).sendKeys(account.getLastName());
 		driver.findElement(By.name("passwd")).sendKeys(account.getPassword());

@@ -1,6 +1,7 @@
 package utils;
 
 import java.lang.Math;
+import java.util.Random;
 
 import page_objects.Account;
 import page_objects.Address;
@@ -10,7 +11,9 @@ public class TestUtils {
 
 	public static String generateEmail() {
 
-		int email = (int) Math.random() * 100;
+		Random r = new Random();
+		
+		int email = r.nextInt(1000);
 		System.out.println(email);
 		return String.format("troll%s@yahoo.com", email);
 

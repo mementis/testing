@@ -21,18 +21,18 @@ public class SignIn {
 
 	WebDriver driver;
 	
-	@Before
-	public void before(Scenario scenario){
-		baseURL  = "http://automationpractice.com/index.php";
-		driver  = new ChromeDriver();
-		System.setProperty("webdriver.chrome.driver", "C:\\Users\\Mena\\eclipse-workspace\\meniki\\chromedriver.exe");
-		System.out.println(scenario.getName());
-	}
-	
-	@After
-	public void after() {
-		driver.close();
-	}
+//	@Before
+//	public void before(Scenario scenario){
+//		baseURL  = "http://automationpractice.com/index.php";
+//		driver  = new ChromeDriver();
+//		System.setProperty("webdriver.chrome.driver", "C:\\Users\\Mena\\eclipse-workspace\\meniki\\chromedriver.exe");
+//		System.out.println(scenario.getName());
+//	}
+//	
+//	@After
+//	public void after() {
+//		driver.close();
+//	}
 
 	@Given("^User lands on homepage$")
 	public void user_lands_on_homepage() throws Throwable {
