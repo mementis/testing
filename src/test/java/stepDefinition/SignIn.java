@@ -21,25 +21,17 @@ public class SignIn {
 
 	WebDriver driver;
 	
-//	@Before
-//	public void before(Scenario scenario){
-//		baseURL  = "http://automationpractice.com/index.php";
-//		driver  = new ChromeDriver();
-//		System.setProperty("webdriver.chrome.driver", "C:\\Users\\Mena\\eclipse-workspace\\meniki\\chromedriver.exe");
-//		System.out.println(scenario.getName());
-//	}
-//	
-//	@After
-//	public void after() {
-//		driver.close();
-//	}
+
 
 	@Given("^User lands on homepage$")
 	public void user_lands_on_homepage() throws Throwable {
-		String expectedValue = "My Store";
+		baseURL  = "http://automationpractice.com/index.php";
+		System.setProperty("webdriver.chrome.driver", "C:\\Users\\Mena\\eclipse-workspace\\meniki\\chromedriver.exe");
+		driver  = new ChromeDriver();
 		driver.get(baseURL);
-		System.out.println(driver.getTitle());
-		assertEquals(driver.getTitle(), expectedValue);
+		assertEquals(driver.getCurrentUrl(), baseURL);
+		
+		
 		
 	}
 
